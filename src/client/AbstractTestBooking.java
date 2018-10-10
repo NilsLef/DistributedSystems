@@ -1,14 +1,15 @@
 package client;
 
 import java.text.ParseException;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
-import rental.Quote;
-import rental.Reservation;
+import Rental.rental.Quote;
+import Rental.rental.Reservation;
 
 /**
  * 

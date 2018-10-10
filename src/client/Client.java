@@ -4,10 +4,13 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
+import Rental.rental.CarType;
 import Rental.rental.ICarRentalCompany;
 import Rental.rental.Quote;
 import Rental.rental.Reservation;
+import Rental.rental.ReservationConstraints;
 
 public class Client extends AbstractTestBooking {
 	
@@ -18,24 +21,31 @@ public class Client extends AbstractTestBooking {
 	public static void main(String[] args) throws Exception {
 		String carRentalCompanyName = "Hertz";
 
-		System.setSecurityManager(null);
-		Registry registry = LocateRegistry.getRegistry(null, 1088);
-		ICarRentalCompany crc = (ICarRentalCompany) registry.lookup(carRentalCompanyName);
-		System.out.println(crc.getAvailableCarTypes(day0, day1));
 		// An example reservation scenario on car rental company 'Hertz' would be...
 		Client client = new Client("simpleTrips", carRentalCompanyName);
 		client.run();  
 	}
 	
+
 	/***************
 	 * CONSTRUCTOR *
 	 ***************/
+	private ICarRentalCompany crc;
+	
+	private ICarRentalCompany getCarRentalCompany() {
+		return this.crc;
+	}
 	
 	public Client(String scriptFile, String carRentalCompanyName) {
 		super(scriptFile);
-		// TODO Auto-generated method stub
-		this.
-		throw new UnsupportedOperationException("TODO");
+		System.setSecurityManager(null);
+		try {
+			Registry registry = LocateRegistry.getRegistry(null, 1088);
+			 this.crc = (ICarRentalCompany) registry.lookup(carRentalCompanyName);
+		} catch (Exception ex) {
+			System.out.println(ex.getStackTrace());
+			
+		}		//throw new UnsupportedOperationException("TODO");
 	}
 	
 	/**
@@ -51,8 +61,11 @@ public class Client extends AbstractTestBooking {
 	 */
 	@Override
 	protected void checkForAvailableCarTypes(Date start, Date end) throws Exception {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("TODO");
+		Set<CarType> list = getCarRentalCompany().getAvailableCarTypes(start, end);
+		for ( CarType type : list) {
+			System.out.println(type);
+		}
+		//throw new UnsupportedOperationException("TODO");
 	}
 
 	/**
@@ -76,8 +89,9 @@ public class Client extends AbstractTestBooking {
 	@Override
 	protected Quote createQuote(String clientName, Date start, Date end,
 			String carType, String region) throws Exception {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("TODO");
+		ReservationConstraints constraints = new ReservationConstraints(start, end, carType, region);
+		return getCarRentalCompany().createQuote(constraints, clientName);
+		//throw new UnsupportedOperationException("TODO");
 	}
 
 	/**
@@ -90,10 +104,10 @@ public class Client extends AbstractTestBooking {
 	 * @throws 	Exception
 	 * 			if things go wrong, throw exception
 	 */
-	@Override
+	//@Override
 	protected Reservation confirmQuote(Quote quote) throws Exception {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("TODO");
+		return getCarRentalCompany().confirmQuote(quote);
+		//throw new UnsupportedOperationException("TODO");
 	}
 	
 	/**
@@ -108,8 +122,8 @@ public class Client extends AbstractTestBooking {
 	 */
 	@Override
 	protected List<Reservation> getReservationsByRenter(String clientName) throws Exception {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("TODO");
+		return getCarRentalCompany().getReservationsByRenter(clientName);
+		//throw new UnsupportedOperationException("TODO");
 	}
 
 	/**
@@ -125,18 +139,7 @@ public class Client extends AbstractTestBooking {
 	@Override
 	protected int getNumberOfReservationsForCarType(String carType) throws Exception {
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("TODO");
+		//throw new UnsupportedOperationException("TODO");
 	}
 
-	@Override
-	protected Rental.rental.Reservation confirmQuote(client.Quote quote) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	protected Rental.rental.Reservation confirmQuote(client.Quote quote) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
