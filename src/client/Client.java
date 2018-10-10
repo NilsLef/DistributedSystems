@@ -34,6 +34,7 @@ public class Client extends AbstractTestBooking {
 	public Client(String scriptFile, String carRentalCompanyName) {
 		super(scriptFile);
 		// TODO Auto-generated method stub
+		this.
 		throw new UnsupportedOperationException("TODO");
 	}
 	
