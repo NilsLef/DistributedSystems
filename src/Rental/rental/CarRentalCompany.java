@@ -1,5 +1,6 @@
 package Rental.rental;
 
+import java.rmi.RemoteException;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
@@ -178,6 +179,26 @@ public class CarRentalCompany implements ICarRentalCompany {
 			}
 		}
 		return out.toString();
+	}
+
+	@Override
+	public List<Reservation> getReservationsByRenter(String clientName) throws RemoteException {
+		List<Reservation> reservations = new java.util.ArrayList<Reservation>();
+		for (Car car : cars) { //EV. THIS.CARS VAN MAKEN!!!
+			reservations.addAll(car.getAllReservationsBy(clientName));
+		}
+		return reservations;
+		
+	}
+
+	@Override
+	public int getNumberOfReservationsForCarType(String carType) throws RemoteException {
+		int count = 0;
+		for (Car car : this.cars) {
+			if (car.isCarType(carType))
+				count += car.getNumberOfReservations();
+		}
+		return count;
 	}
 	
 }

@@ -45,7 +45,7 @@ public class Client extends AbstractTestBooking {
 		} catch (Exception ex) {
 			System.out.println(ex.getStackTrace());
 			
-		}		//throw new UnsupportedOperationException("TODO");
+		}
 	}
 	
 	/**
@@ -65,7 +65,6 @@ public class Client extends AbstractTestBooking {
 		for ( CarType type : list) {
 			System.out.println(type);
 		}
-		//throw new UnsupportedOperationException("TODO");
 	}
 
 	/**
@@ -91,7 +90,6 @@ public class Client extends AbstractTestBooking {
 			String carType, String region) throws Exception {
 		ReservationConstraints constraints = new ReservationConstraints(start, end, carType, region);
 		return getCarRentalCompany().createQuote(constraints, clientName);
-		//throw new UnsupportedOperationException("TODO");
 	}
 
 	/**
@@ -107,7 +105,6 @@ public class Client extends AbstractTestBooking {
 	//@Override
 	protected Reservation confirmQuote(Quote quote) throws Exception {
 		return getCarRentalCompany().confirmQuote(quote);
-		//throw new UnsupportedOperationException("TODO");
 	}
 	
 	/**
@@ -123,7 +120,6 @@ public class Client extends AbstractTestBooking {
 	@Override
 	protected List<Reservation> getReservationsByRenter(String clientName) throws Exception {
 		return getCarRentalCompany().getReservationsByRenter(clientName);
-		//throw new UnsupportedOperationException("TODO");
 	}
 
 	/**
@@ -138,8 +134,7 @@ public class Client extends AbstractTestBooking {
 	 */
 	@Override
 	protected int getNumberOfReservationsForCarType(String carType) throws Exception {
-		// TODO Auto-generated method stub
-		//throw new UnsupportedOperationException("TODO");
+		return getCarRentalCompany().getNumberOfReservationsForCarType(carType);
 	}
 
 }

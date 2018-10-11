@@ -81,4 +81,8 @@ public class CarType implements Serializable {
 			return false;
 		return true;
 	}
+	
+	public boolean isSameCarType(String name) {
+		return getName().equals(name);
+	}
 }

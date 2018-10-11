@@ -65,4 +65,26 @@ public class Car implements Serializable {
         // equals-method for Reservation is required!
         reservations.remove(reservation);
     }
+    
+    public List<Reservation> getReservations() {
+    	List<Reservation> result = new java.util.ArrayList<Reservation>(this.reservations);
+    	return result;
+    }
+    
+    public List<Reservation> getAllReservationsBy(String clientName){
+    	List<Reservation> reservationsByClient = new ArrayList<Reservation>();
+    	for (Reservation reservation : this.reservations) {
+    		if(reservation.getCarRenter().equals(clientName))
+    			reservationsByClient.add(reservation);
+    	}
+    	return reservationsByClient;
+    }
+    
+    public int getNumberOfReservations() {
+    	return this.reservations.size();
+    }
+    
+    public boolean isCarType(String carType) {
+    	return getType().isSameCarType(carType);
+    }
 }
